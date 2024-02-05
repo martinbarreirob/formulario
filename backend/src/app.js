@@ -1,12 +1,14 @@
 import express from "express";
 import db from "./config/db.js"
 import indexRouter from "./routes/index.route.js";
+import cors from "cors";
 
 const app = express();
 
 app.set("port", process.env.PORT || 3000);
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 //Rutas

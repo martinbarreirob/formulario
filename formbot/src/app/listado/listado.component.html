@@ -1,0 +1,24 @@
+<div class="card">
+  <div *ngIf="data">
+    <h2>Datos de la API:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Email</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data.data">
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.password }}</td>
+          <td>
+            <button>DEL</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
