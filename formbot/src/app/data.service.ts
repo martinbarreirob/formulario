@@ -19,6 +19,5 @@ export class DataService {
 
   updateUsers(users: any[]): void {
     this.usersSubject.next(users);
-    console.log('this usersubjec', this.usersSubject);
   }
 }

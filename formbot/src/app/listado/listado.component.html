@@ -1,5 +1,5 @@
 <div class="card">
-  <div *ngIf="data">
+  <div *ngIf="usuarios">
     <h2>Datos de la API:</h2>
     <table>
       <thead>
@@ -10,12 +10,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of data.data">
+        <tr *ngFor="let item of usuarios.data">
           <td>{{ item.nombre }}</td>
           <td>{{ item.email }}</td>
           <td>{{ item.password }}</td>
           <td>
-            <button>DEL</button>
+            <button (click)="deleteData(item.nombre)">X</button>
           </td>
         </tr>
       </tbody>

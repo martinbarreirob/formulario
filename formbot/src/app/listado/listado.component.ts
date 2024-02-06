@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DataService } from '../data.service';
 
 
 @Component({
@@ -8,20 +9,31 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./listado.component.css']
 })
 export class ListadoComponent {
-  public data: any;
+  public usuarios: any;
+  public apiUrl = 'http://localhost:3000/api/usuarios'; // Reemplaza con la URL de tu API
+  constructor(private http: HttpClient, private dataService: DataService) { }
 
-  constructor(private http: HttpClient) { }
-
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.fetchData();
 
+    this.dataService.users$.subscribe(users => {
+      if (this.usuarios !== undefined) {
+        this.usuarios.data.push(users);
+      }
+    });
   }
 
   fetchData(): void {
-    const apiUrl = 'http://localhost:3000/api/usuarios'; // Reemplaza con la URL de tu API
+    this.http.get(this.apiUrl).subscribe((response) => {
+      this.usuarios = response;
+    });
+  }
 
-    this.http.get(apiUrl).subscribe((response) => {
-      this.data = response;
+  deleteData(idUser: any): void{
+    this.http.delete(`${this.apiUrl}/${idUser}`).subscribe((response) => {
+      if(response){
+        this.fetchData();
+      }
     });
   }
 }
